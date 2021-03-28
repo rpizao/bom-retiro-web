@@ -1,0 +1,88 @@
+@import "../../../_shared/css/pages.scss";
+
+.container:first-child {
+  padding-top: 2em;
+}
+
+.input {
+  border: 1px;
+}
+
+
+div.input > .subtitle > i {
+  padding-right: 0.5em;
+}
+
+.progress {
+  height: 3em;
+
+  .new {
+    background-color: rgb(216, 241, 216) !important;
+    color: black;
+  }
+
+  .analyze {
+    background-color: lightgreen;
+    color: black;
+  }
+
+  .in-progress {
+    background-color: green;
+  }
+
+  .late {
+    background-color: red;
+  }
+
+  .attention {
+    background-color: yellow;
+    color: black;
+  }
+
+  .finish {
+    background-color: blue;
+  }
+
+  .cancel {
+    background-color: grey;
+    color: black;
+  }
+
+}
+
+.selected {
+  border: 3px solid #e8e51e;
+}
+
+ul {
+  padding-top: 1em;
+}
+
+.comment {
+  border: 1px solid #f8f9fa;
+  border-radius: 10px !important;
+}
+
+div.show {
+  display: block;
+}
+
+.modal-header {
+  background: #124f20;
+  color: white;
+  align-items: center;
+
+  .close {
+    color: white;
+  }
+
+  .subtitle{
+    color: white;
+    font-size: x-small;
+  }
+}
+
+a .subtitle {
+  color: white;
+  font-size: xx-small;
+}

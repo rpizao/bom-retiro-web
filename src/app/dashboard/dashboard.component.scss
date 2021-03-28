@@ -1,0 +1,44 @@
+@import "../_shared/css/pages.scss";
+
+h1 {
+  margin-top: revert !important;
+}
+
+.card {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding:0;
+  min-width: 15em;
+  width: 25em;
+  max-width: 100%;
+  height: fit-content;
+  max-height: 100%;
+
+  .card-title{
+    display: flex;
+    align-items: baseline;
+
+    .title {
+      font-size: 20px;
+      padding-left: 0.5em;
+    }
+  }
+
+  .description{
+    font-size: 12px;
+  }
+}
+
+.bottom {
+  display:flex;
+  margin-top:11px;
+  align-items: center;
+
+  span {
+    margin-top:4px;
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+    font-weight: 600;
+  }
+}

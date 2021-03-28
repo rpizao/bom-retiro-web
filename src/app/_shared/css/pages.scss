@@ -1,0 +1,41 @@
+@media (max-width: 900px){
+  * {
+    font-size: small
+  }
+
+  .only-lg {
+    display: none;
+  }
+}
+/*
+@media (min-width: 901px){
+  .only-lg {
+    display: block;
+  }
+} */
+
+.container:first-child {
+  padding-top: 3em;
+}
+
+.title {
+  font-size: 1.25rem;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.back {
+  padding-bottom: 1em;
+  color: gray;
+}
+
+.table tr.clickable:hover {
+  cursor: pointer;
+}
+
+.right {
+  text-align: right;
+}

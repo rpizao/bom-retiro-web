@@ -1,0 +1,41 @@
+@import "../_shared/css/pages.scss";
+
+td > i {
+  padding-right: 0.5em;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.table tr.clickable:hover {
+  background: #e5f1e56e;
+}
+
+.clickable {
+  color: rgb(90, 87, 87);
+}
+
+.in-progress {
+  color: green;
+}
+
+.late {
+  color: red;
+}
+
+.attention {
+  color: yellow;
+}
+
+.finish {
+  color: blue;
+}
+
+.cancel {
+  color: grey;
+}
+
+.new {
+  color: none;
+}

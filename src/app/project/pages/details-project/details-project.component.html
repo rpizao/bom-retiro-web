@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="clickable back" (click)="goBack()">
+    <i class="bi bi-arrow-return-left"></i> voltar
+  </div>
+
+  <div class="input">
+    <div class="row">
+      <div class="col-md-9">
+        <h4>{{project?.title}}</h4>
+        <div class="subtitle">
+          <i color="primary" class="icon bi bi-{{getDepartmentIcon(project?.department)}}" title="{{getDepartment(project?.department)}}"></i>
+          <span>
+            {{getDepartment(project?.department)}} | criado em {{project?.created}}
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-3 right">
+        <a href="#" class="btn btn-primary btn-lg" role="button" href="javascript:void(0)" style="margin-bottom: 0.5em;" (click)="confirmProgress()">
+          <i class="bi bi-pin"></i>
+          {{ getProgress(lastProgress?.nextStates[0]) }}
+          <div class="subtitle">Finalizar etapa e seguir para próxima...</div>
+        </a>
+        <a href="#" class="btn btn-secondary btn-sm" role="button" style="margin-bottom: 0.5em;" (click)="cancelProject()" href="javascript:void(0)" >
+          Cancelar
+        </a>
+      </div>
+    </div>
+
+    <div class="input">
+      {{project?.description}}
+    </div>
+
+    <br>
+
+    <div style="font-size: x-small;">
+      Clique para ver os comentários inseridos durante o progresso.
+    </div>
+    <div class="progress">
+      <div *ngFor="let pg of project?.progress"
+        class="progress-bar {{pg.state}} {{isProgressSelected(pg)}} clickable" role="progressbar"
+        [style]="'width: ' + pg.percentual + '%'"
+        aria-valuenow="{{pg.percentual}}" aria-valuemin="0"
+        aria-valuemax="100" (click)="progressSelected = pg">
+        {{getProgress(pg.state)}}
+      </div>
+    </div>
+
+    <div [hidden]="!progressSelected">
+      <span style="font-size: small;" class="clickable" *ngIf="!progressSelected?.lock" data-toggle="modal" data-target="#addCommentModal" (click)="addCommentShow = true">
+        <i class="icon bi bi-plus-circle"></i> adicione suas considerações
+      </span>
+
+      <!-- <span>{{getProgress(progressSelected?.state)}}</span> -->
+      <ul class="list-group" *ngIf="progressSelected?.comments">
+        <div class="comment">
+          <li *ngFor="let comment of progressSelected?.comments" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <small>{{comment.date}}</small>
+            </div>
+            <p class="mb-1">{{comment.text}}</p>
+            <small>{{comment.author}}</small>
+          </li>
+        </div>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addCommentModal" tabindex="-1" role="dialog" [class.show]="addCommentShow">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{project?.title}}
+          <br><span class="subtitle">{{getProgress(progressSelected?.state)}}</span>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="addCommentShow = false">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group" [formGroup]="commentForm">
+          <label for="commentControl" [ngClass]="{'required': check('comment') }">Escreva suas considerações</label>
+          <textarea [ngClass]="{'required': check('comment') }" class="form-control" id="commentControl" rows="3" formControlName="comment"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="button" disabled *ngIf="loading">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span class="sr-only">Aguarde...</span>
+        </button>
+        <button *ngIf="!loading" type="button" class="btn" (click)="addComment()">Confirma</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

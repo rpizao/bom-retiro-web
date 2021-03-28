@@ -1,0 +1,35 @@
+<!-- Header navigation -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand">
+      Gestão Integrada Municipal
+      <br><a class="navbar-brand subtitle">Prefeitura de Bom Retiro</a>
+    </a>
+
+    <button (click)="toggleNav()" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive" [ngClass]="{'show': navToggle}">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link {{isSelected(0) ? 'selected' : ''}}" routerLink="/dashboard" (click)="navSelectedPosition = 0; navToggle = false">
+                <i class="bi bi-bar-chart-fill"></i>
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{isSelected(1) ? 'selected' : ''}}" routerLink="/projects" (click)="navSelectedPosition = 1; navToggle = false">
+                <i class="bi bi-kanban"></i>
+                Projetos
+              </a>
+            </li>
+            <li class="nav-item">
+                <a href="javascript:void(0)" class="nav-link" (click)="logout()">
+                  <i class="bi bi-x-circle"></i>
+                  Sair
+                </a>
+            </li>
+          </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,23 @@
+<div class="container">
+  <table class="table table-responsive-sm">
+    <thead>
+      <tr>
+        <th scope="col-sm"></th>
+        <th scope="col">Título</th>
+        <th scope="col">Origem</th>
+        <th scope="col">Prazo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="clickable" *ngFor="let p of projects" (click)="goDetails(p.code)">
+        <td><i [class]="p.status" class="bi bi-circle-fill"></i></td>
+        <td>{{p.title}}</td>
+        <td>
+          <i class="icon bi bi-{{getDepartmentIcon(p.department)}}" title="{{getDepartment(p.department)}}"></i>
+          <span class="only-lg">{{getDepartment(p.department)}}</span>
+        </td>
+        <td>{{p.expiresIn}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

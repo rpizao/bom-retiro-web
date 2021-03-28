@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+body.publicPage {
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #0052D4, #65C7F7, #9CECFB);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #0052D4, #65C7F7, #9CECFB);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: .75rem;
+}
+
+
+.form-control.required {
+  border: 1px solid red;
+}
+
+.required {
+  color : red;
+}
+
+.navbar-brand {
+  color   : white !important;
+}
+
+.navbar {
+  background: #124f20;
+  color: white;
+}
+
+.nav-link:focus {
+  color: #13e413 !important;
+}
+
+.nav-link:hover {
+  color: #13e413 !important;
+  /* text-decoration: overline; */
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+}
+
+.right{
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.clickable {
+  cursor: pointer;
+}
