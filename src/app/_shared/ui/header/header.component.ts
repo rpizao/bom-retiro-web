@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { MessageDialogService } from '../../components/message-dialog/confirm-dialog.service';
 import { AuthService } from './../../../_auth/services/auth.service';
+
 
 @Component({
   selector: 'app-header',
@@ -14,8 +15,7 @@ export class HeaderComponent implements OnInit {
   navSelectedPosition: number = 0;
 
   constructor(
-    private authService: AuthService,
-    private route: ActivatedRoute
+    private authService: AuthService
   ) { }
 
   ngOnInit() {

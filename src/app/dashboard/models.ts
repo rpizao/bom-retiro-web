@@ -1,4 +1,4 @@
-export interface HealthIndicator {
+export interface Indicator {
   code: string;
   title: string;
   classifier: string

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { HealthIndicator } from "src/app/dashboard/models";
+import { Indicator } from "src/app/dashboard/models";
 import { Project } from "src/app/project/models";
 
 @Injectable()

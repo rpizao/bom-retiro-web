@@ -1,33 +1,34 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { routingModule } from './app.routing';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { IndicatorService } from 'src/services/indicator.service';
+import { ProjectService } from 'src/services/project.service';
 import { AppComponent } from './app.component';
-import { UiModule } from './_shared/ui/ui.module';
-import { FakeBackendInterceptor } from './_shared/fakebackend';
+import { routingModule } from './app.routing';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuard } from './_auth/guards/auth.guard';
-import { TokenIntercept } from './_auth/tokenintercept';
+import { GraphicsComponent } from './dashboard/pages/graphics/graphics.component';
+import { ItemsModule } from './items/items.module';
+import { ItemsService } from './items/_services/items.service';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-
-import { ItemsModule } from './items/items.module';
-
-import { ItemsService } from './items/_services/items.service';
-import { AuthService } from './_auth/services/auth.service';
-import { IndicatorService } from 'src/services/indicator.service';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GraphicsComponent } from './dashboard/pages/graphics/graphics.component';
-import { ProjectComponent } from './project/project.component';
 import { DetailsProjectComponent } from './project/pages/details-project/details-project.component';
-import { ProjectService } from 'src/services/project.service';
-import { MessageDialogComponent } from './_shared/components/message-dialog/message-dialog.component';
+import { ProjectComponent } from './project/project.component';
+import { AuthGuard } from './_auth/guards/auth.guard';
+import { AuthService } from './_auth/services/auth.service';
+import { TokenIntercept } from './_auth/tokenintercept';
+import { AlertModule } from './_shared/components/alert/alert.module';
+import { LoadingComponent } from './_shared/components/loading/loading.components';
+import { LoadingService } from './_shared/components/loading/loading.service';
 import { MessageDialogService } from './_shared/components/message-dialog/confirm-dialog.service';
+import { MessageDialogComponent } from './_shared/components/message-dialog/message-dialog.component';
+import { FakeBackendInterceptor } from './_shared/fakebackend';
+import { UiModule } from './_shared/ui/ui.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MessageDialogService } from './_shared/components/message-dialog/confir
     ProjectComponent,
     DetailsProjectComponent,
     MessageDialogComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ import { MessageDialogService } from './_shared/components/message-dialog/confir
     FormsModule,
     ItemsModule,
     NgxChartsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AlertModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/'},
@@ -69,7 +72,9 @@ import { MessageDialogService } from './_shared/components/message-dialog/confir
     ItemsService,
     IndicatorService,
     ProjectService,
-    MessageDialogService
+    MessageDialogService,
+    LoadingService,
+    NgbToast
   ],
   bootstrap: [AppComponent]
 })

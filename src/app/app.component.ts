@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { Subscription, BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-
-import { AuthService } from './_auth/services/auth.service';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { ItemsService } from './items/_services/items.service';
+import { AuthService } from './_auth/services/auth.service';
+
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     @Inject(DOCUMENT) private document: any,
-    private itemsService: ItemsService,
+    private itemsService: ItemsService
   ) { }
 
   ngOnInit() {
@@ -74,4 +74,5 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authService.logout();
     this.itemsService.clear();
   }
+
 }

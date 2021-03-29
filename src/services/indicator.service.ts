@@ -1,22 +1,24 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { HealthIndicator } from "src/app/dashboard/models";
+import { Indicator } from "src/app/dashboard/models";
+import { AlertService } from "src/app/_shared/components/alert/alert.service";
+import { LoadingService } from "src/app/_shared/components/loading/loading.service";
+import { MessageDialogService } from "src/app/_shared/components/message-dialog/confirm-dialog.service";
+import { GenericHttp } from "./generic-http";
 
 @Injectable()
-export class IndicatorService {
+export class IndicatorService extends GenericHttp{
 
-  get(): Observable<HealthIndicator[]> {
-    return of([
-      {
-        code: "1",
-        title: "Ritmo de Ocupação",
-        classifier: "health",
-        description: "Comparativo entre a infra disponível e a ocupação média, identificando os picos ou ociosidades."
-      }
-    ]);
+  constructor(client: HttpClient, spinner: LoadingService, alert: AlertService){
+    super(client, spinner, alert);
   }
 
-  getSource(code: string): Observable<HealthIndicator> {
+  list(result:(r: Indicator[]) => void): void {
+    this.get("/api/indicators", result);
+  }
+
+  getSource(code: string): Observable<Indicator> {
     return of({
       code: "1",
       title: "Ritmo de Ocupação",

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IndicatorService } from 'src/services/indicator.service';
 import { DepartmentHelper } from '../helpers/department-helper';
-import { HealthIndicator } from './models';
+import { AlertService } from '../_shared/components/alert/alert.service';
+import { Indicator } from './models';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,10 +12,16 @@ import { HealthIndicator } from './models';
 })
 export class DashboardComponent implements OnInit {
 
-  indicators: HealthIndicator[] = [];
+  isLoading: boolean = true;
 
-  constructor(private healthService: IndicatorService, private router: Router) {
-    healthService.get().subscribe(r => this.indicators = r);
+  indicators: Indicator[] = [];
+  options = {
+    autoClose: false,
+    keepAfterRouteChange: false
+  };
+
+  constructor(private healthService: IndicatorService, private router: Router, public alert: AlertService) {
+    healthService.list(r => this.indicators = r);
   }
 
   ngOnInit() {}

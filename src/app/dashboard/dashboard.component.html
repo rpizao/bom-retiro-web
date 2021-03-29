@@ -1,4 +1,6 @@
 <div class="container">
+  <span *ngIf="!indicators || indicators.length == 0">No momento, ainda não há indicadores disponíveis.</span>
+
   <div class="card" *ngFor="let card of indicators">
     <div class="card-body">
         <div class="card-title">

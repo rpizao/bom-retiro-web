@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IndicatorService } from 'src/services/indicator.service';
-import { HealthIndicator } from '../../models';
+import { Indicator } from '../../models';
 
 @Component({
   selector: 'app-graphics',
@@ -10,7 +10,7 @@ import { HealthIndicator } from '../../models';
 })
 export class GraphicsComponent {
 
-  indicator: HealthIndicator;
+  indicator: Indicator;
 
   view: any[] = [];
 
