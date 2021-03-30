@@ -16,26 +16,30 @@ td > i {
   color: rgb(90, 87, 87);
 }
 
-.in-progress {
-  color: green;
+.PRAZO {
+  color: #0ad60a;
 }
 
-.late {
+.ATRASADO {
   color: red;
 }
 
-.attention {
-  color: yellow;
+.CANCELADO {
+  color: gray;
 }
 
-.finish {
+.FINALIZADO {
   color: blue;
 }
 
-.cancel {
-  color: grey;
+.finished {
+  color: lightgray;
+
+  .subtitle {
+    color: lightgray;
+  }
 }
 
-.new {
-  color: none;
+.subtitle {
+  font-size: x-small;
 }

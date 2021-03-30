@@ -6,30 +6,32 @@
   <div class="input">
     <div class="row">
       <div class="col-md-9">
-        <h4>{{project?.title}}</h4>
         <div class="subtitle">
-          <i color="primary" class="icon bi bi-{{getDepartmentIcon(project?.department)}}" title="{{getDepartment(project?.department)}}"></i>
-          <span>
-            {{getDepartment(project?.department)}} | criado em {{project?.created}}
+          <span class="header">
+            [{{project?.department}}] | criado em {{project?.created}}
           </span>
         </div>
+        <h4>{{project?.title}}</h4>
       </div>
 
-      <div class="col-md-3 right">
+      <div class="state-toolbar col-md-3 right" *ngIf="!progressIsLock()">
         <a href="#" class="btn btn-primary btn-lg" role="button" href="javascript:void(0)" style="margin-bottom: 0.5em;" (click)="confirmProgress()">
-          <i class="bi bi-pin"></i>
-          {{ getProgress(lastProgress?.nextStates[0]) }}
-          <div class="subtitle">Finalizar etapa e seguir para próxima...</div>
+          <i class="bi bi-clipboard-check"></i>
+          <div class="only-lg">
+            {{ lastProgress?.nextStates[0] }}
+          </div>
+          <div class="subtitle only-lg">Avançar para o próximo estágio...</div>
         </a>
         <a href="#" class="btn btn-secondary btn-sm" role="button" style="margin-bottom: 0.5em;" (click)="cancelProject()" href="javascript:void(0)" >
-          Cancelar
+          <i class="bi bi-x-circle"></i>
+          <div class="only-lg">
+            Cancelar
+          </div>
         </a>
       </div>
     </div>
 
-    <div class="input">
-      {{project?.description}}
-    </div>
+    <div class="input" innerHtml="{{project?.description}}"></div>
 
     <br>
 
@@ -38,17 +40,17 @@
     </div>
     <div class="progress">
       <div *ngFor="let pg of project?.progress"
-        class="progress-bar {{pg.state}} {{isProgressSelected(pg)}} clickable" role="progressbar"
+        class="progress-bar {{pg.state}} {{isActualProgress(pg)}} {{isProgressSelected(pg)}} clickable" role="progressbar"
         [style]="'width: ' + pg.percentual + '%'"
         aria-valuenow="{{pg.percentual}}" aria-valuemin="0"
         aria-valuemax="100" (click)="progressSelected = pg">
-        {{getProgress(pg.state)}}
+        {{pg.state}}
       </div>
     </div>
 
     <div [hidden]="!progressSelected">
       <span style="font-size: small;" class="clickable" *ngIf="!progressSelected?.lock" data-toggle="modal" data-target="#addCommentModal" (click)="addCommentShow = true">
-        <i class="icon bi bi-plus-circle"></i> adicione suas considerações
+        <i class="icon bi bi-plus-circle"></i> considerações
       </span>
 
       <!-- <span>{{getProgress(progressSelected?.state)}}</span> -->
@@ -75,7 +77,7 @@
       <div class="modal-header">
         <h5 class="modal-title">
           {{project?.title}}
-          <br><span class="subtitle">{{getProgress(progressSelected?.state)}}</span>
+          <br><span class="subtitle">{{progressSelected?.state}}</span>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="addCommentShow = false">
           <span aria-hidden="true">&times;</span>
@@ -92,7 +94,7 @@
           <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
           <span class="sr-only">Aguarde...</span>
         </button>
-        <button *ngIf="!loading" type="button" class="btn" (click)="addComment()">Confirma</button>
+        <button *ngIf="!loading" type="button" class="btn btn-primary" (click)="addComment()">Confirma</button>
       </div>
     </div>
   </div>

@@ -1,14 +1,14 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IndicatorService } from 'src/services/indicator.service';
 import { Indicator } from '../../models';
 
 @Component({
-  selector: 'app-graphics',
-  templateUrl: './graphics.component.html',
-  styleUrls: ['./graphics.component.css']
+  selector: 'app-graphics-1d',
+  templateUrl: './graphics1d.component.html',
+  styleUrls: ['./graphics1d.component.css']
 })
-export class GraphicsComponent {
+export class Graphics1dComponent {
 
   indicator: Indicator;
 
@@ -18,19 +18,20 @@ export class GraphicsComponent {
   showXAxis = true;
   showYAxis = true;
   gradient = false;
-  showLegend = true;
+  showLegend = false;
   showXAxisLabel = false;
-  xAxisLabel = 'Por dia';
+  xAxisLabel: string;
   showYAxisLabel = false;
-  yAxisLabel = 'Qtd. Leitos (Centenas)';
+  yAxisLabel: string;
+  yMaxValue: string;
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#0a58ab']
   };
 
   constructor(private healthService: IndicatorService, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.healthService.getSource(this.activatedRoute.snapshot.params["code"])
-                      .subscribe(r => this.indicator = r);
+    this.healthService.getIndicador(
+      this.activatedRoute.snapshot.params["code"], r => this.indicator = r);
   }
 
   goBack(){

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DepartmentHelper } from 'src/app/helpers/department-helper';
-import { ProjectProgressHelper } from 'src/app/helpers/progress-project-helper';
 import { MessageDialogService } from 'src/app/_shared/components/message-dialog/confirm-dialog.service';
 import { CheckRequiredField, FormHelper } from 'src/app/_shared/helpers/form.helper';
 import { ProjectService } from 'src/services/project.service';
@@ -30,8 +28,7 @@ export class DetailsProjectComponent implements OnInit {
       comment: ["", Validators.required]
     });
 
-    projectService.getSource(this.activatedRoute.snapshot.params["code"])
-                  .subscribe(r => this.project = r);
+    projectService.getProject(this.activatedRoute.snapshot.params["code"], r => this.project = r);
   }
 
   ngOnInit(): void {
@@ -41,20 +38,20 @@ export class DetailsProjectComponent implements OnInit {
     this.router.navigate(["projects"]);
   }
 
-  getDepartment(classifier: string): string {
-    return DepartmentHelper.getClassifierDescription(classifier);
-  }
-
-  getDepartmentIcon(classifier: string): string {
-    return DepartmentHelper.getClassifierIcon(classifier);
-  }
-
-  getProgress(progress: string): string {
-    return ProjectProgressHelper.getProgressDescription(progress);
-  }
-
   isProgressSelected(pg: Progress){
     return this.progressSelected != null && pg.state == this.progressSelected.state ? "selected" : "";
+  }
+
+  isActualProgress(pg: Progress): string{
+    if(!this.project) return null;
+
+    if(this.project.progress[this.project.progress.length - 1].state == pg.state) return "actual";
+    return "old";
+  }
+
+  progressIsLock(): boolean {
+    if(!this.project) return null;
+    return this.project.progress[this.project.progress.length - 1].lock;
   }
 
   check(name: string): boolean{
@@ -65,21 +62,23 @@ export class DetailsProjectComponent implements OnInit {
     if(!FormHelper.isValid(this.commentForm)) return;
 
     this.loading = true;
-    this.projectService.addComment(this.project.code, this.commentForm.get("comment").value)
-        .subscribe(ok => {
-          this.loading = false;
-          this.addCommentShow = false;
-        });
+    this.projectService.addComment(
+      this.project.code,
+      this.commentForm.get("comment").value,
+      ok => {
+        this.loading = false;
+        this.addCommentShow = false;
+      });
   }
 
   get lastProgress(): Progress {
-    if(!this.project.progress) return null;
+    if(!this.project || !this.project.progress) return null;
     return this.project.progress[this.project.progress.length - 1];
   }
 
   confirmProgress(){
     this.dialogService.confirm('Prosseguir?',
-      'Deseja ir para o próximo estágio e tornar o projeto <b>' + this.getProgress(this.lastProgress.nextStates[0]) + '</b>?')
+      'Deseja ir para o próximo estágio e tornar o projeto <strong>' + this.lastProgress.nextStates[0] + '</strong>?')
     .then((confirmed) => console.log('User confirmed:', confirmed))
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }

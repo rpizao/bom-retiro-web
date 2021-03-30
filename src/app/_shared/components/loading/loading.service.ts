@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingComponent } from '../loading/loading.components';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LoadingService {
 
-  constructor(private modalService: NgbModal) { }
+  private modalRef: NgbModalRef;
+
+  constructor(private modalService: NgbModal) {}
 
   public loading(){
-    const modalRef = this.modalService.open(LoadingComponent, { size: 'lg' });
-    return modalRef.result;
+    if(this.modalRef) this.unloading();
+    this.modalRef = this.modalService.open(LoadingComponent, { size: 'lg' });
+    return this.modalRef.result;
   }
 
   public unloading(){
-    const modalRef = this.modalService.open(LoadingComponent, { size: 'lg' });
-    return modalRef.dismiss();
+    if(this.modalRef.componentInstance) this.modalRef.close();
   }
 
 }

@@ -4,18 +4,32 @@
       <tr>
         <th scope="col-sm"></th>
         <th scope="col">Título</th>
-        <th scope="col">Origem</th>
+        <!-- <th scope="col">Origem</th> -->
         <th scope="col">Prazo</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="clickable" *ngFor="let p of projects" (click)="goDetails(p.code)">
-        <td><i [class]="p.status" class="bi bi-circle-fill"></i></td>
-        <td>{{p.title}}</td>
+      <tr [ngClass]="{'finished': p.finished}" class="clickable" *ngFor="let p of projects" (click)="goDetails(p.code)">
         <td>
-          <i class="icon bi bi-{{getDepartmentIcon(p.department)}}" title="{{getDepartment(p.department)}}"></i>
-          <span class="only-lg">{{getDepartment(p.department)}}</span>
+          <i *ngIf="!p.finished" [class]="p.status" class="bi bi-circle-fill"></i>
+          <i *ngIf="p.finished" [class]="p.status" class="bi bi-check-circle-fill"></i>
         </td>
+        <td>
+          <div class="subtitle">
+            <span class="header">
+              [{{p?.department}}] | criado em {{p?.created}}
+            </span>
+          </div>
+          {{p.title}}
+        </td>
+        <!-- <td>
+          <div class="subtitle">
+            <span class="header">
+              [{{p?.department}}] | criado em {{p?.created}}
+            </span>
+          </div>
+          <span class="only-lg">{{p?.department}}</span>
+        </td> -->
         <td>{{p.expiresIn}}</td>
       </tr>
     </tbody>

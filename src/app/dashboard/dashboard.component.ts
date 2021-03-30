@@ -21,13 +21,14 @@ export class DashboardComponent implements OnInit {
   };
 
   constructor(private healthService: IndicatorService, private router: Router, public alert: AlertService) {
-    healthService.list(r => this.indicators = r);
+    this.healthService.list(r => this.indicators = r);
   }
 
   ngOnInit() {}
 
-  goGraphics(code: string){
-    this.router.navigate(['dashboard/graphics', code]);
+  goGraphics(indicator: Indicator){
+    if(indicator.configuration.dimension == "1d") this.router.navigate(['dashboard/graphics1d', indicator.code]);
+    else this.router.navigate(['dashboard/graphics2d', indicator.code]);
   }
 
   getClassifierIcon(classifier: string): string {

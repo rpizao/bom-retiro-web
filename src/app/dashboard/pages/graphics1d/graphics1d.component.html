@@ -4,15 +4,14 @@
   </div>
   <div class="title">
     {{indicator?.title}}
-    <div class="subtitle">
-      {{indicator?.description}}
-    </div>
+    <div class="subtitle" [innerHtml]="indicator?.description"></div>
   </div>
   <br>
-  <ngx-charts-bar-vertical-2d #graphic
+  <ngx-charts-bar-vertical #graphic
     [view]="[container.offsetWidth / 1.06, 250]"
-    [results]="indicator.source"
-    [legendTitle]="'Leitos'"
+    [scheme]="colorScheme"
+    [results]="indicator?.source1d"
+    [legendTitle]="indicator?.title"
     [legend]="showLegend"
     [gradient]="gradient"
     [xAxis]="showXAxis"
@@ -21,6 +20,7 @@
     [showYAxisLabel]="showYAxisLabel"
     [xAxisLabel]="xAxisLabel"
     [yAxisLabel]="yAxisLabel"
+    [yScaleMax]="indicator?.configuration?.maxY"
     [legendPosition]="'below'">
-  </ngx-charts-bar-vertical-2d>
+  </ngx-charts-bar-vertical>
 </div>

@@ -1,11 +1,13 @@
 export interface Project {
   code: string;
   title: string;
-  status: 'late' | 'attention' | 'in-progress' | 'finish' | 'cancel' | 'new';
+  status: string;
   description: string;
   department: string;
   created: string;
   expiresIn?: string;
+  author: string;
+  finished: boolean;
   progress?: Progress[];
 }
 

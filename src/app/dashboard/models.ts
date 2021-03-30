@@ -3,7 +3,9 @@ export interface Indicator {
   title: string;
   classifier: string
   description: string;
-  source?: DataIndicator[];
+  configuration: Configuration;
+  source1d?: SerieIndicator[];
+  source2d?: DataIndicator[];
 }
 
 export interface DataIndicator {
@@ -14,4 +16,9 @@ export interface DataIndicator {
 export interface SerieIndicator {
   name: string;
   value: number;
+}
+
+export interface Configuration {
+  dimension: string;
+  maxY: string;
 }

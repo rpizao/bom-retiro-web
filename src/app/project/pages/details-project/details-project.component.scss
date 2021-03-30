@@ -1,5 +1,13 @@
 @import "../../../_shared/css/pages.scss";
 
+@media (max-width: 900px){
+  .state-toolbar {
+    a {
+      margin-right: 0.5em;
+    }
+  }
+}
+
 .container:first-child {
   padding-top: 2em;
 }
@@ -16,36 +24,9 @@ div.input > .subtitle > i {
 .progress {
   height: 3em;
 
-  .new {
-    background-color: rgb(216, 241, 216) !important;
-    color: black;
-  }
-
-  .analyze {
-    background-color: lightgreen;
-    color: black;
-  }
-
-  .in-progress {
-    background-color: green;
-  }
-
-  .late {
+  .CANCELADO {
     background-color: red;
-  }
-
-  .attention {
-    background-color: yellow;
-    color: black;
-  }
-
-  .finish {
-    background-color: blue;
-  }
-
-  .cancel {
-    background-color: grey;
-    color: black;
+    color: white;
   }
 
 }
@@ -85,4 +66,16 @@ div.show {
 a .subtitle {
   color: white;
   font-size: xx-small;
+}
+
+.header {
+  font-size: x-small;
+}
+
+.actual {
+  background: blue;
+}
+
+.old {
+  background: gray;
 }

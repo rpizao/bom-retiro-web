@@ -14,7 +14,7 @@ export class ProjectComponent implements OnInit {
   projects: Project[];
 
   constructor(private projectService: ProjectService, private router: Router) {
-    projectService.get().subscribe(r => this.projects = r);
+    projectService.list(r => this.projects = r);
   }
 
   ngOnInit(): void {
@@ -31,6 +31,10 @@ export class ProjectComponent implements OnInit {
 
   goDetails(code: string){
     this.router.navigate(["projects/detail/", code]);
+  }
+
+  isFinished(p: Project): string {
+    return p.finished ? "finished " : '';
   }
 
 }

@@ -1,60 +1,31 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { Indicator } from "src/app/dashboard/models";
 import { Project } from "src/app/project/models";
+import { AuthService } from "src/app/_auth/services/auth.service";
+import { AlertService } from "src/app/_shared/components/alert/alert.service";
+import { LoadingService } from "src/app/_shared/components/loading/loading.service";
+import { GenericHttp } from "./generic-http";
 
-@Injectable()
-export class ProjectService {
+@Injectable({
+  providedIn: "root"
+})
+export class ProjectService extends GenericHttp {
 
-  get(): Observable<Project[]> {
-    return of([
-      {
-        code: "1",
-        title: "Construção de nova UPA no bairro Canoas",
-        department: "health",
-        description: "Construção de nova unidade de pronto atendimento no bairro Canoas. A sugestão veio a partir da sugestão de morador local, através do portal da prefeitura.",
-        status: "in-progress",
-        created: "2020-11-10",
-        expiresIn: "2023-01-01"
-      }
-    ]);
+  constructor(client: HttpClient, spinner: LoadingService, alert: AlertService, private authService: AuthService){
+    super(client, spinner, alert);
   }
 
-  getSource(code: string): Observable<Project> {
-    return of({
-      code: "1",
-      title: "Construção de nova UPA no bairro Canoas",
-      department: "health",
-      description: "Construção de nova unidade de pronto atendimento no bairro Canoas. A sugestão veio a partir da sugestão de morador local, através do portal da prefeitura.",
-      status: "in-progress",
-      created: "2020-11-10",
-      expiresIn: "2023-01-01",
-      progress: [
-        {
-          state: "analyze",
-          percentual: 10,
-          lock: true,
-          nextStates: ["in-progress"],
-          comments: [
-            {date: "2020-12-15", text: "Uma comissão irá tratar o assunto.", author: "Ronaldo"},
-            {date: "2020-12-05", text: "Projeto entrou em discussão na câmara para debater os detalhes e aprová-lo ou não.", author: "Pedro"}
-          ]
-        },
-        {
-          state: "in-progress",
-          percentual: 25,
-          lock: false,
-          nextStates: ["finish", "cancel"],
-          /* comments: [
-            {date: "2020-12-30", text: "Projeto aprovado.", author: "João"},
-          ] */
-        }
-      ]
-    });
+  list(result: (r: Project[]) => void): void {
+    this.get<Project[]>("/api/projects", result);
   }
 
-  addComment(projectCode: string, comment: string): Observable<boolean>{
-    return of(true);
+  getProject(code: string, result: (r: Project) => void): void {
+    this.get<Project>("/api/projects/" + code, result);
+  }
+
+  addComment(code: string, comment: string, result: (r: Project) => void): void {
+    const user = this.authService.getUserData();
+    this.put<Project>("/api/projects/" + code + "/comment", {author: user.fullname, text: comment}, result);
   }
 
 }

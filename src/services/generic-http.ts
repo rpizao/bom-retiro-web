@@ -7,7 +7,7 @@ import { LoadingService } from 'src/app/_shared/components/loading/loading.servi
 export abstract class GenericHttp {
 
   private isLoading: boolean;
-  protected useLoading: boolean = false;
+  protected useLoading: boolean = true;
 
   constructor(private client: HttpClient, private spinner: LoadingService, private alert: AlertService){}
 
@@ -31,9 +31,8 @@ export abstract class GenericHttp {
 
   private prepareRequest<T>(observable: Observable<T>, then:(result: T) => void, fail:(error: any) => void): void{
     if(this.useLoading){
-      this.presentLoading(() => {
-        this.invokeApi(observable, then, fail);
-      });
+      this.presentLoading();
+      this.invokeApi(observable, then, fail);
     }
     else this.invokeApi(observable, then, fail);
   }
@@ -53,11 +52,8 @@ export abstract class GenericHttp {
     );
   }
 
-  private async presentLoading(callAfter:() => void) {
-    if(this.isLoading) this.dismiss();
-
+  private presentLoading() {
     this.isLoading = true;
-
     return this.spinner.loading();
   }
 
