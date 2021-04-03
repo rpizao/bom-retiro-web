@@ -1,7 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, Subject, throwError, of, BehaviorSubject } from 'rxjs';
-import { map, mergeMap, switchMap, catchError, tap } from 'rxjs/operators';
+import { BehaviorSubject, of, Subject } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { UserModel } from '../models/user.model';
 
@@ -58,7 +58,7 @@ export class AuthService {
   }
 
   async logout() {
-    return this.http.get(environment['apiBaseUrl'] + '/api/auth/logout').toPromise().then(
+    return this.http.get(environment['apiBaseUrl'] + '/api/logout').toPromise().then(
       () => {
         // clear any current data
         this.clearData();
@@ -74,24 +74,21 @@ export class AuthService {
   }
 
   async login({ username , password }): Promise<any>  {
-    // clear some data
     this.clearData();
 
-    // create the payload data for the api request
     const loginData  = {
       'username' : username,
       'password' : password
     };
 
-    const data  = await this.http.post(environment['apiBaseUrl'] + '/api/auth/login' , loginData).toPromise();
+    const data  = await this.http.post(environment['apiBaseUrl'] + '/api/login' , loginData).toPromise();
 
-    // this part only gets executed when the promise is resolved
     if (data['token'] && data['user']) {
 
         this.setDataAfterLogin(data);
-        this.isLoggedIn.next(true); // how do I unit test this?
-
+        this.isLoggedIn.next(true);
         return data['user'];
+
     } else {
       return false;
     }
@@ -104,7 +101,7 @@ export class AuthService {
   }
 
   getUserData(): UserModel {
-    return this.userData;
+    return JSON.parse(localStorage.getItem("usermeta")) as UserModel;
   }
 
   private setDataAfterLogin(data) {

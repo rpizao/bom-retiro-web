@@ -1,6 +1,6 @@
 
 input.form-control.rounded {
-  border-radius: 2rem !important;
+  border-radius: 0.5rem !important;
 }
 
 .card-signin {
@@ -15,6 +15,10 @@ input.form-control.rounded {
   font-size: 1.5rem;
 }
 
+.subtitle {
+  font-size: medium;
+}
+
 .card-signin .card-body {
   padding: 2rem;
 }
@@ -25,7 +29,7 @@ input.form-control.rounded {
 
 .form-signin .btn {
   font-size: 80%;
-  border-radius: 5rem;
+  border-radius: 0.5rem;
   letter-spacing: .1rem;
   font-weight: bold;
   padding: 1rem;

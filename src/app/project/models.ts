@@ -8,6 +8,7 @@ export interface Project {
   expiresIn?: string;
   author: string;
   finished: boolean;
+  priority: string;
   progress?: Progress[];
 }
 

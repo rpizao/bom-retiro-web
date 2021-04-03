@@ -7,8 +7,7 @@
         <div class="card-title">
           <span class="title">{{card.title}}</span>
         </div>
-        <div class="description">
-          {{card.description}}
+        <div class="description" innerHtml="{{card.description}}">
         </div>
         <div class="bottom">
           <span class="clickable right" (click)="goGraphics(card)">ver gráfico >></span>

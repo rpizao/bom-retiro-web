@@ -11,27 +11,29 @@
             [{{project?.department}}] | criado em {{project?.created}}
           </span>
         </div>
-        <h4>{{project?.title}}</h4>
+        <h4>
+          <span [class]="project?.priority"><i class="bi bi-{{getPriorityClass(project?.priority)}}"></i></span>
+          {{project?.title}}
+        </h4>
+        <div class="input" innerHtml="{{project?.description}}"></div>
       </div>
 
-      <div class="state-toolbar col-md-3 right" *ngIf="!progressIsLock()">
+      <div class="state-toolbar col-md-3 right" *ngIf="!progressIsLock() && isAuthMoveState()">
         <a href="#" class="btn btn-primary btn-lg" role="button" href="javascript:void(0)" style="margin-bottom: 0.5em;" (click)="confirmProgress()">
+          <div class="subtitle only-lg">Avançar para o estágio...</div>
           <i class="bi bi-clipboard-check"></i>
-          <div class="only-lg">
+          <div>
             {{ lastProgress?.nextStates[0] }}
           </div>
-          <div class="subtitle only-lg">Avançar para o próximo estágio...</div>
         </a>
-        <a href="#" class="btn btn-secondary btn-sm" role="button" style="margin-bottom: 0.5em;" (click)="cancelProject()" href="javascript:void(0)" >
+        <a href="#" class="btn btn-danger btn-sm" role="button" style="margin-bottom: 0.5em;" (click)="cancelProject()" href="javascript:void(0)" >
           <i class="bi bi-x-circle"></i>
-          <div class="only-lg">
+          <div>
             Cancelar
           </div>
         </a>
       </div>
     </div>
-
-    <div class="input" innerHtml="{{project?.description}}"></div>
 
     <br>
 
@@ -49,11 +51,13 @@
     </div>
 
     <div [hidden]="!progressSelected">
-      <span style="font-size: small;" class="clickable" *ngIf="!progressSelected?.lock" data-toggle="modal" data-target="#addCommentModal" (click)="addCommentShow = true">
-        <i class="icon bi bi-plus-circle"></i> considerações
-      </span>
+      <div style="width: 100%; font-size: small;">
+        <span style="float: left;" class="clickable" *ngIf="!progressSelected?.lock" data-toggle="modal" data-target="#addCommentModal" (click)="addCommentShow = true">
+          <i class="icon bi bi-plus-circle"></i> considerações
+        </span>
+        <span style="float: right;">Até {{project?.expiresIn}}</span>
+      </div>
 
-      <!-- <span>{{getProgress(progressSelected?.state)}}</span> -->
       <ul class="list-group" *ngIf="progressSelected?.comments">
         <div class="comment">
           <li *ngFor="let comment of progressSelected?.comments" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -90,14 +94,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" type="button" disabled *ngIf="loading">
-          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-          <span class="sr-only">Aguarde...</span>
-        </button>
-        <button *ngIf="!loading" type="button" class="btn btn-primary" (click)="addComment()">Confirma</button>
+        <button type="button" class="btn btn-primary" (click)="addComment()">Confirma</button>
       </div>
     </div>
   </div>
 </div>
-
-

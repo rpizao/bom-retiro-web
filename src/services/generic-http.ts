@@ -3,6 +3,7 @@ import { classToPlain } from 'class-transformer';
 import { Observable } from 'rxjs';
 import { AlertService } from 'src/app/_shared/components/alert/alert.service';
 import { LoadingService } from 'src/app/_shared/components/loading/loading.service';
+import { environment } from 'src/environments/environment';
 
 export abstract class GenericHttp {
 
@@ -11,10 +12,8 @@ export abstract class GenericHttp {
 
   constructor(private client: HttpClient, private spinner: LoadingService, private alert: AlertService){}
 
-  protected static readonly URL: string = "http://localhost:8008";
-
   protected getUrl():string{
-    return GenericHttp.URL;
+    return environment.apiBaseUrl;
   }
 
   protected post<T>(partialUrl: string, body: any, then:(result: T) => void, fail?:(error: any) => void): void {

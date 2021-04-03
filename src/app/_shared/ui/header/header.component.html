@@ -3,7 +3,8 @@
   <div class="container">
     <a class="navbar-brand">
       Gestão Integrada Municipal
-      <br><a class="navbar-brand subtitle">Prefeitura de Bom Retiro</a>
+      <br>
+      <a class="navbar-brand subtitle">Prefeitura de Bom Retiro</a>
     </a>
 
     <button (click)="toggleNav()" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +27,8 @@
             <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link" (click)="logout()">
                   <i class="bi bi-x-circle"></i>
-                  Sair
+                  {{user?.fullname}}
+                  <span class="tag"> [ {{user?.department}} ] </span>
                 </a>
             </li>
           </ul>

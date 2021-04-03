@@ -1,9 +1,9 @@
-import { Component, OnInit , Inject } from '@angular/core';
-import { Validators, AbstractControl, FormBuilder, FormGroup, FormControl , Validator , FormsModule} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { CheckRequiredField } from '../_shared/helpers/form.helper';
 import { AuthService } from '../_auth/services/auth.service';
+import { CheckRequiredField } from '../_shared/helpers/form.helper';
+
 
 @Component({
   selector: 'app-login',
@@ -31,13 +31,6 @@ export class LoginComponent implements OnInit {
       this.initForm();
     }
   }
-
-  // checkRequiredClass(frmControl: string) {
-  //   const t  = this.loginForm.get()
-  //   return {
-  //     'required' : false
-  //   };
-  // }
 
   onSubmitButtonClicked() {
     this.error  = false;

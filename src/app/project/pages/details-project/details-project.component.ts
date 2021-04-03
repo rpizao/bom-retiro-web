@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/_auth/services/auth.service';
 import { MessageDialogService } from 'src/app/_shared/components/message-dialog/confirm-dialog.service';
 import { CheckRequiredField, FormHelper } from 'src/app/_shared/helpers/form.helper';
 import { ProjectService } from 'src/services/project.service';
@@ -16,13 +17,12 @@ export class DetailsProjectComponent implements OnInit {
   project: Project;
   progressSelected: Progress;
   addCommentShow: boolean = false;
-  loading: boolean = false;
 
   commentForm: FormGroup;
   private checkField  = CheckRequiredField;
 
   constructor(private router: Router, private projectService: ProjectService, private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder, private dialogService: MessageDialogService) {
+    private fb: FormBuilder, private dialogService: MessageDialogService, private authService: AuthService) {
 
     this.commentForm = fb.group({
       comment: ["", Validators.required]
@@ -61,13 +61,12 @@ export class DetailsProjectComponent implements OnInit {
   addComment(){
     if(!FormHelper.isValid(this.commentForm)) return;
 
-    this.loading = true;
     this.projectService.addComment(
       this.project.code,
       this.commentForm.get("comment").value,
       ok => {
-        this.loading = false;
         this.addCommentShow = false;
+        this.projectService.getProject(this.project.code, r => this.project = r);
       });
   }
 
@@ -90,4 +89,18 @@ export class DetailsProjectComponent implements OnInit {
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
+  getPriorityClass(priority: string): string {
+    switch (priority) {
+      case "high": return "chevron-double-up";
+      case "medium-high": return "chevron-up";
+      case "medium": return "dash";
+      case "medium-low": return "chevron-down";
+      case "low": return "chevron-double-down";
+    }
+  }
+
+  isAuthMoveState(): boolean {
+    const user = this.authService.getUserData();
+    return user.department == "GOVERNO";
+  }
 }

@@ -30,6 +30,7 @@ import { MessageDialogService } from './_shared/components/message-dialog/confir
 import { MessageDialogComponent } from './_shared/components/message-dialog/message-dialog.component';
 import { FakeBackendInterceptor } from './_shared/fakebackend';
 import { UiModule } from './_shared/ui/ui.module';
+import { ProjectFormComponent } from './project/pages/crud/project-form/project-form.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { UiModule } from './_shared/ui/ui.module';
     ProjectComponent,
     DetailsProjectComponent,
     MessageDialogComponent,
-    LoadingComponent
+    LoadingComponent,
+    ProjectFormComponent
   ],
   imports: [
     BrowserModule,

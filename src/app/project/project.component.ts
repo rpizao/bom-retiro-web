@@ -33,8 +33,4 @@ export class ProjectComponent implements OnInit {
     this.router.navigate(["projects/detail/", code]);
   }
 
-  isFinished(p: Project): string {
-    return p.finished ? "finished " : '';
-  }
-
 }
