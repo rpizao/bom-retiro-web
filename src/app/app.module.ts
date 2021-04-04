@@ -21,6 +21,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { ProjectFormComponent } from './project/pages/crud/project-form/project-form.component';
 import { DetailsProjectComponent } from './project/pages/details-project/details-project.component';
 import { ProjectComponent } from './project/project.component';
+import { AuthAdminGuard } from './_auth/guards/auth-admin.guard';
 import { AuthGuard } from './_auth/guards/auth.guard';
 import { AuthService } from './_auth/services/auth.service';
 import { TokenIntercept } from './_auth/tokenintercept';
@@ -62,6 +63,7 @@ import { UiModule } from './_shared/ui/ui.module';
   providers: [
     { provide: APP_BASE_HREF, useValue: '/'},
     AuthGuard,
+    AuthAdminGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenIntercept,

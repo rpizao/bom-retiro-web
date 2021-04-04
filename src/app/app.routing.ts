@@ -8,6 +8,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { ProjectFormComponent } from './project/pages/crud/project-form/project-form.component';
 import { DetailsProjectComponent } from './project/pages/details-project/details-project.component';
 import { ProjectComponent } from './project/project.component';
+import { AuthAdminGuard } from './_auth/guards/auth-admin.guard';
 import { AuthGuard } from './_auth/guards/auth.guard';
 
 const routes: Routes = [
@@ -24,7 +25,7 @@ const routes: Routes = [
       children: [
         { path: '', component: ProjectComponent , canActivate: [AuthGuard] },
         { path: 'detail/:code', component: DetailsProjectComponent , canActivate: [AuthGuard] },
-        { path: 'new', component: ProjectFormComponent , canActivate: [AuthGuard] },
+        { path: 'new', component: ProjectFormComponent , canActivate: [AuthAdminGuard] },
       ]
     },
     { path: 'login', component: LoginComponent },

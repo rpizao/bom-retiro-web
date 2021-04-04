@@ -9,15 +9,15 @@ export interface Project {
   author: string;
   finished: boolean;
   priority: string;
+  nextState: string;
   progress?: Progress[];
 }
 
 export interface Progress {
   state: string;
   percentual?: number;
-  comments?: ProgressComment[];
   lock: boolean;
-  nextStates: string[];
+  comments?: ProgressComment[];
 }
 
 export interface ProgressComment {

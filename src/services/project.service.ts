@@ -34,4 +34,16 @@ export class ProjectService extends GenericHttp {
     this.post<Project>("/api/projects", project, result);
   }
 
+  updateStatus(project: Project, result: (r: Project) => void): void {
+    const user = this.authService.getUserData();
+    project.author = user.fullname;
+    this.put<Project>("/api/projects/" + project.code + "/state", {}, result);
+  }
+
+  cancel(project: Project, result: (r: Project) => void): void {
+    const user = this.authService.getUserData();
+    project.author = user.fullname;
+    this.put<Project>("/api/projects/" + project.code + "/cancel", {}, result);
+  }
+
 }

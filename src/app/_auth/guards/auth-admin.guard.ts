@@ -4,7 +4,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthAdminGuard implements CanActivate {
 
     constructor(
         private router: Router,
@@ -13,7 +13,8 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.authService.hasToken()) {
-            return true;
+          const userLogged = this.authService.getUserData();
+          if(userLogged.department == "GOVERNO") return true;
         }
 
         this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});

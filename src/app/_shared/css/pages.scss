@@ -33,6 +33,15 @@
     font-size: xx-small !important;
   }
 
+  .float-button {
+    bottom: 6em !important;
+    right: 2em !important;
+
+    i {
+      font-size: 30px !important;
+    }
+  }
+
 }
 /*
 @media (min-width: 901px){

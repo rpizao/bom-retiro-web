@@ -77,15 +77,19 @@ export class DetailsProjectComponent implements OnInit {
 
   confirmProgress(){
     this.dialogService.confirm('Prosseguir?',
-      'Deseja ir para o próximo estágio e tornar o projeto <strong>' + this.lastProgress.nextStates[0] + '</strong>?')
-    .then((confirmed) => console.log('User confirmed:', confirmed))
+      'Deseja ir para o próximo estágio e tornar o projeto <strong>' + this.project.nextState + '</strong>?')
+    .then((confirmed) => {
+      if(confirmed) this.projectService.updateStatus(this.project, r => this.project);
+    })
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
   cancelProject(){
     this.dialogService.confirm('Cancelar?',
       'Deseja cancelar o projeto <b>' + this.project.title + '</b>?')
-    .then((confirmed) => console.log('User confirmed:', confirmed))
+    .then((confirmed) => {
+      if(confirmed) this.projectService.cancel(this.project, r => this.project);
+    })
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
