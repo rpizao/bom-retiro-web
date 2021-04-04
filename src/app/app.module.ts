@@ -18,6 +18,7 @@ import { ItemsModule } from './items/items.module';
 import { ItemsService } from './items/_services/items.service';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { ProjectFormComponent } from './project/pages/crud/project-form/project-form.component';
 import { DetailsProjectComponent } from './project/pages/details-project/details-project.component';
 import { ProjectComponent } from './project/project.component';
 import { AuthGuard } from './_auth/guards/auth.guard';
@@ -30,7 +31,6 @@ import { MessageDialogService } from './_shared/components/message-dialog/confir
 import { MessageDialogComponent } from './_shared/components/message-dialog/message-dialog.component';
 import { FakeBackendInterceptor } from './_shared/fakebackend';
 import { UiModule } from './_shared/ui/ui.module';
-import { ProjectFormComponent } from './project/pages/crud/project-form/project-form.component';
 
 @NgModule({
   declarations: [

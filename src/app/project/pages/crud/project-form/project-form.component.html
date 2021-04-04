@@ -1,3 +1,76 @@
 <div class="container">
-  <p>project-form works!</p>
+
+  <h4>Novo Projeto</h4>
+
+  <div class="form-group" [formGroup]="projectForm">
+
+    <div class="input">
+      <label for="titleControl" [ngClass]="{'required': check('title') }">Título</label>
+      <input type="text" [ngClass]="{'required': check('title') }" class="form-control" id="titleControl" formControlName="title">
+    </div>
+
+    <div class="input">
+      <label for="priorityControl" [ngClass]="{'required': check('priority') }">Prioridade</label>
+
+      <div id="priorityControl">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="priority" value="high">
+          <label class="form-check-label" [ngClass]="{'required': check('priority') }">Muito Alta</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="priority" value="medium-high">
+          <label class="form-check-label" [ngClass]="{'required': check('priority') }">Alta</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="priority" value="medium">
+          <label class="form-check-label" [ngClass]="{'required': check('priority') }">Média</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="priority" value="medium-low">
+          <label class="form-check-label" [ngClass]="{'required': check('priority') }">Baixa</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="priority" value="low">
+          <label class="form-check-label" [ngClass]="{'required': check('priority') }">Muito Baixa</label>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="input">
+      <label for="descriptionControl" [ngClass]="{'required': check('description') }">Breve descrição</label>
+      <textarea [ngClass]="{'required': check('description') }" class="form-control" id="descriptionControl" rows="3" formControlName="description"></textarea>
+    </div>
+
+    <div class="input">
+      <label for="departmentControl" [ngClass]="{'required': check('department') }">Departamento</label>
+      <select  id="departmentControl" formControlName="department" class="form-control" [ngClass]="{'required': check('department') }">
+        <option>Selecione...</option>
+        <option value="EDUCAÇÃO">EDUCAÇÃO</option>
+        <option value="MEIO-AMBIENTE">MEIO-AMBIENTE</option>
+        <option value="SAÚDE">SAÚDE</option>
+        <option value="SEGURANÇA">SEGURANÇA</option>
+        <option value="AGRO">AGRO</option>
+      </select>
+    </div>
+
+    <div class="input">
+      <label for="expiresInControl" [ngClass]="{'required': (check('expiresIn') || !isAfterToday()) }">Data limite</label>
+      <input type="date" [ngClass]="{'required': (check('expiresIn') || !isAfterToday())}" class="form-control" formControlName="expiresIn">
+      <span class="subtitle">(Prazo mínimo de 1 dia)</span>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="saveProject()">Confirma</button>
+  </div>
+
 </div>

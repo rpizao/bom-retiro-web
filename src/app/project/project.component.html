@@ -16,6 +16,9 @@
           <i *ngIf="!p.finished" [class]="p.status" class="bi bi-circle-fill"></i>
           <i *ngIf="p.finished && p.status != 'CANCELADO'" [class]="p.status" class="bi bi-check-circle-fill"></i>
           <i *ngIf="p.finished && p.status == 'CANCELADO'" [class]="p.status" class="bi bi-x-circle-fill"></i>
+
+          <span [class]="p?.priority"><i class="bi bi-{{getPriorityClass(p?.priority)}}"></i></span>
+
         </td>
         <td>
           <div class="subtitle">

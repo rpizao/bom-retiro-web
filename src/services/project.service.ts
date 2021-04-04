@@ -28,4 +28,10 @@ export class ProjectService extends GenericHttp {
     this.put<Project>("/api/projects/" + code + "/comment", {author: user.fullname, text: comment}, result);
   }
 
+  save(project: Project, result: (r: Project) => void): void {
+    const user = this.authService.getUserData();
+    project.author = user.fullname;
+    this.post<Project>("/api/projects", project, result);
+  }
+
 }

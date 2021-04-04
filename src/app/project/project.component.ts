@@ -33,4 +33,14 @@ export class ProjectComponent implements OnInit {
     this.router.navigate(["projects/detail/", code]);
   }
 
+  getPriorityClass(priority: string): string {
+    switch (priority) {
+      case "high": return "chevron-double-up";
+      case "medium-high": return "chevron-up";
+      case "medium": return "dash";
+      case "medium-low": return "chevron-down";
+      case "low": return "chevron-double-down";
+    }
+  }
+
 }

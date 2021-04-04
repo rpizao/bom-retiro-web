@@ -20,6 +20,7 @@ export class DetailsProjectComponent implements OnInit {
 
   commentForm: FormGroup;
   private checkField  = CheckRequiredField;
+  check = (name: string): boolean => !this.commentForm || this.checkField(this.commentForm.get(name));
 
   constructor(private router: Router, private projectService: ProjectService, private activatedRoute: ActivatedRoute,
     private fb: FormBuilder, private dialogService: MessageDialogService, private authService: AuthService) {
@@ -54,10 +55,6 @@ export class DetailsProjectComponent implements OnInit {
     return this.project.progress[this.project.progress.length - 1].lock;
   }
 
-  check(name: string): boolean{
-    return !this.commentForm || this.checkField(this.commentForm.get(name));
-  }
-
   addComment(){
     if(!FormHelper.isValid(this.commentForm)) return;
 
@@ -66,7 +63,10 @@ export class DetailsProjectComponent implements OnInit {
       this.commentForm.get("comment").value,
       ok => {
         this.addCommentShow = false;
-        this.projectService.getProject(this.project.code, r => this.project = r);
+        this.projectService.getProject(this.project.code, r => {
+          this.progressSelected = null;
+          this.project = r;
+        });
       });
   }
 
