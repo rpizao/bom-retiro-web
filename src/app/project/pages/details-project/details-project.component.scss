@@ -9,12 +9,22 @@
         font-size: 8px;
       }
       margin-right: 0.5em;
-      width: 100%;
     }
+
+  }
+
+  .detail {
+    font-size: 10px !important;
   }
 
   .progress-bar {
     font-size: 8px !important;
+  }
+}
+
+.state-toolbar {
+  a {
+    width: 100%;
   }
 }
 
@@ -24,6 +34,11 @@
 
 .input {
   border: 1px;
+
+  .row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
 }
 
 
@@ -33,12 +48,6 @@ div.input > .subtitle > i {
 
 .progress {
   height: 3em;
-
-  .CANCELADO {
-    background-color: red;
-    color: white;
-  }
-
 }
 
 .selected {
@@ -82,8 +91,12 @@ a .subtitle {
   font-size: x-small;
 }
 
-.actual {
-  background: blue;
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
 }
 
 .old {
@@ -122,4 +135,20 @@ a .subtitle {
 .btn-danger {
   margin-bottom: 0.5em;
   font-size: x-small;
+}
+
+.PRAZO {
+  background: #0ad60a;
+}
+
+.ATRASADO {
+  background: red;
+}
+
+.minor {
+  font-size: 10px !important;
+}
+
+.medium {
+  font-size: 16px !important;
 }

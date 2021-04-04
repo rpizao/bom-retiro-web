@@ -13,30 +13,18 @@
     <tbody>
       <tr [ngClass]="{'finished': p.finished}" class="clickable" *ngFor="let p of projects" (click)="goDetails(p.code)">
         <td>
-          <i *ngIf="!p.finished" [class]="p.status" class="bi bi-circle-fill"></i>
-          <i *ngIf="p.finished && p.status != 'CANCELADO'" [class]="p.status" class="bi bi-check-circle-fill"></i>
-          <i *ngIf="p.finished && p.status == 'CANCELADO'" [class]="p.status" class="bi bi-x-circle-fill"></i>
-
-          <span [class]="p?.priority"><i class="bi bi-{{getPriorityClass(p?.priority)}}"></i></span>
-
+          <span [class]="'icon ' + p?.status"><i class="bi bi-{{getIconState(p)}}"></i></span>
+          <span [class]="'icon ' + p?.priority"><i class="bi bi-{{getPriorityClass(p?.priority)}}"></i></span>
         </td>
         <td>
           <div class="subtitle">
             <span class="header">
-              [{{p?.department}}] | criado em {{p?.created}}
+              [{{p?.department}}] | criado em {{p?.created | date: 'dd/MM/yyyy'}}
             </span>
           </div>
           {{p.title}}
         </td>
-        <!-- <td>
-          <div class="subtitle">
-            <span class="header">
-              [{{p?.department}}] | criado em {{p?.created}}
-            </span>
-          </div>
-          <span class="only-lg">{{p?.department}}</span>
-        </td> -->
-        <td>{{p.expiresIn}}</td>
+        <td>{{p.expiresIn | date: 'dd/MM/yyyy'}}</td>
       </tr>
     </tbody>
   </table>

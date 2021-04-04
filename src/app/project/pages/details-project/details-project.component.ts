@@ -46,7 +46,9 @@ export class DetailsProjectComponent implements OnInit {
   isActualProgress(pg: Progress): string{
     if(!this.project) return null;
 
-    if(this.project.progress[this.project.progress.length - 1].state == pg.state) return "actual";
+    if(this.project.progress[this.project.progress.length - 1].state == pg.state) {
+      return this.project.status;
+    }
     return "old";
   }
 
@@ -79,7 +81,11 @@ export class DetailsProjectComponent implements OnInit {
     this.dialogService.confirm('Prosseguir?',
       'Deseja ir para o próximo estágio e tornar o projeto <strong>' + this.project.nextState + '</strong>?')
     .then((confirmed) => {
-      if(confirmed) this.projectService.updateStatus(this.project, r => this.project);
+      if(confirmed) this.projectService.updateStatus(this.project,
+        r => {
+          this.project = r;
+          this.progressSelected = null;
+        });
     })
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
@@ -88,7 +94,11 @@ export class DetailsProjectComponent implements OnInit {
     this.dialogService.confirm('Cancelar?',
       'Deseja cancelar o projeto <b>' + this.project.title + '</b>?')
     .then((confirmed) => {
-      if(confirmed) this.projectService.cancel(this.project, r => this.project);
+      if(confirmed) this.projectService.cancel(this.project,
+        r => {
+          this.project = r;
+          this.progressSelected = null;
+        });
     })
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
@@ -103,7 +113,7 @@ export class DetailsProjectComponent implements OnInit {
     }
   }
 
-  isAuthMoveState(): boolean {
+  isAuthStateChange(): boolean {
     const user = this.authService.getUserData();
     return user.department == "GOVERNO";
   }

@@ -5,12 +5,14 @@
 
   <div class="input">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-10">
         <div class="subtitle">
-          <span class="header">
-            [{{project?.department}}] | criado em {{project?.created}}
+          <span class="header left">
+            [{{project?.department}}] | criado em {{project?.created | date: 'dd/MM/yyyy'}}
           </span>
+          <span class="header right">Prazo: {{project?.expiresIn | date: 'dd/MM/yyyy'}}</span>
         </div>
+        <br>
         <h4>
           <span [class]="project?.priority"><i class="bi bi-{{getPriorityClass(project?.priority)}}"></i></span>
           {{project?.title}}
@@ -18,8 +20,8 @@
         <div class="input" innerHtml="{{project?.description}}"></div>
       </div>
 
-      <div class="state-toolbar col-md-3 right" *ngIf="!progressIsLock() && isAuthMoveState()">
-        <a href="#" class="btn btn-primary btn-lg" role="button" href="javascript:void(0)" style="margin-bottom: 0.5em;" (click)="confirmProgress()">
+      <div class="state-toolbar col right" *ngIf="!progressIsLock() && isAuthStateChange()">
+        <a href="#" class="btn btn-primary btn-sm" role="button" href="javascript:void(0)" style="margin-bottom: 0.5em;" (click)="confirmProgress()">
           <div class="subtitle only-lg">Avançar para o estágio...</div>
           <i class="bi bi-clipboard-check"></i>
           <div>
@@ -35,9 +37,8 @@
       </div>
     </div>
 
-    <br>
-
-    <div style="font-size: x-small;">
+    <div style="padding-top: 1em; padding-left: 15px; padding-right: 15px;">
+    <div class="detail">
       Clique para ver os comentários inseridos durante o progresso.
     </div>
     <div class="progress">
@@ -51,24 +52,24 @@
     </div>
 
     <div [hidden]="!progressSelected">
-      <div style="width: 100%; font-size: small;">
-        <span style="float: left;" class="clickable" *ngIf="!progressSelected?.lock" data-toggle="modal" data-target="#addCommentModal" (click)="addCommentShow = true">
+      <div class="detail">
+        <span class="clickable" *ngIf="!progressSelected?.lock" data-toggle="modal" data-target="#addCommentModal" (click)="addCommentShow = true">
           <i class="icon bi bi-plus-circle"></i> considerações
         </span>
-        <span style="float: right;">Até {{project?.expiresIn}}</span>
       </div>
 
-      <ul class="list-group" *ngIf="progressSelected?.comments">
+      <ul class="list-group" *ngIf="progressSelected?.comments?.length > 0">
         <div class="comment">
           <li *ngFor="let comment of progressSelected?.comments" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
-              <small>{{comment.date}}</small>
+              <small><strong>{{comment.date | date: 'dd/MM/yyyy'}} às {{comment.date | date: 'HH:mm'}}</strong></small>
             </div>
             <p class="mb-1">{{comment.text}}</p>
-            <small>{{comment.author}}</small>
+            <small><strong>{{comment.author}}</strong></small>
           </li>
         </div>
       </ul>
+    </div>
     </div>
 
   </div>
@@ -90,7 +91,7 @@
       <div class="modal-body">
         <div class="form-group" [formGroup]="commentForm">
           <label for="commentControl" [ngClass]="{'required': check('comment') }">Escreva suas considerações</label>
-          <textarea [ngClass]="{'required': check('comment') }" class="form-control" id="commentControl" rows="3" formControlName="comment"></textarea>
+          <textarea [ngClass]="{'required': check('comment') }" class="form-control" id="commentControl" rows="3" formControlName="comment" autofocus></textarea>
         </div>
       </div>
       <div class="modal-footer">

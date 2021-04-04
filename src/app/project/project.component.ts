@@ -43,4 +43,14 @@ export class ProjectComponent implements OnInit {
     }
   }
 
+  getIconState(p: Project): string {
+    if(!p) return null;
+
+    if(!p.finished) return "circle-fill";
+    else {
+      if(p.state == "CANCELADO") return "x-circle-fill";
+      else return "check-circle-fill";
+    }
+  }
+
 }

@@ -10,6 +10,7 @@ export interface Project {
   finished: boolean;
   priority: string;
   nextState: string;
+  state: string;
   progress?: Progress[];
 }
 
