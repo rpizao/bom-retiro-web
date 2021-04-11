@@ -46,14 +46,15 @@
         class="progress-bar {{pg.state}} {{isActualProgress(pg)}} {{isProgressSelected(pg)}} clickable" role="progressbar"
         [style]="'width: ' + pg.percentual + '%'"
         aria-valuenow="{{pg.percentual}}" aria-valuemin="0"
-        aria-valuemax="100" (click)="progressSelected = pg">
+        aria-valuemax="100" (click)="progressSelected = pg"
+        data-toggle="tooltip" data-placement="top" title="Iniciado em {{pg.created | date: 'dd/MM/yyyy'}}">
         {{pg.state}}
       </div>
     </div>
 
     <div [hidden]="!progressSelected">
       <div class="detail">
-        <span class="clickable" *ngIf="!progressSelected?.lock" data-toggle="modal" data-target="#addCommentModal" (click)="addCommentShow = true">
+        <span class="clickable" *ngIf="!progressSelected?.lock && hasAuthToComment()" data-toggle="modal" data-target="#addCommentModal" (click)="addCommentShow = true">
           <i class="icon bi bi-plus-circle"></i> considerações
         </span>
       </div>

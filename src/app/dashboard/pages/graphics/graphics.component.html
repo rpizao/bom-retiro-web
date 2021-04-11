@@ -1,5 +1,5 @@
 <div #container class="container">
-  <div class="clickable back" (click)="goBack()">
+  <div class="clickable back" routerLink="/dashboard">
     <i class="bi bi-arrow-return-left"></i> voltar
   </div>
   <div class="title">
@@ -7,10 +7,10 @@
     <div class="subtitle" [innerHtml]="indicator?.description"></div>
   </div>
   <br>
-  <ngx-charts-bar-vertical #graphic
+  <ngx-charts-bar-vertical-2d #graphic
     [view]="[container.offsetWidth / 1.06, 250]"
     [scheme]="colorScheme"
-    [results]="indicator?.source1d"
+    [results]="indicator?.source"
     [legendTitle]="indicator?.title"
     [legend]="showLegend"
     [gradient]="gradient"
@@ -21,6 +21,8 @@
     [xAxisLabel]="xAxisLabel"
     [yAxisLabel]="yAxisLabel"
     [yScaleMax]="indicator?.configuration?.maxY"
-    [legendPosition]="'below'">
-  </ngx-charts-bar-vertical>
+    [legendPosition]="'below'"
+    [barPadding]="2"
+    [groupPadding]="4">
+  </ngx-charts-bar-vertical-2d>
 </div>

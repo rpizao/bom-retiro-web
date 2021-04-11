@@ -117,4 +117,12 @@ export class DetailsProjectComponent implements OnInit {
     const user = this.authService.getUserData();
     return user.department == "GOVERNO";
   }
+
+  hasAuthToComment(): boolean {
+    if(!this.project) return false;
+
+    const userLogged = this.authService.getUserData();
+    return userLogged.department == this.project.department || userLogged.department == "GOVERNO";
+  }
+
 }

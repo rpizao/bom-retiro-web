@@ -22,7 +22,7 @@ export class ProjectFormComponent implements OnInit {
   today = DateHelper.nowString();
 
   constructor(private fb: FormBuilder, private projectService: ProjectService,
-    private alert: AlertService, private route: Router) {
+    private alert: AlertService, private route: Router, private authService: AuthService) {
     this.projectForm = this.fb.group({
       title: ["", Validators.required],
       description: ["", Validators.required],
@@ -30,9 +30,28 @@ export class ProjectFormComponent implements OnInit {
       expiresIn: ["", Validators.required],
       priority: ["", Validators.required]
     });
+
+    this.forceDepartmentSelect();
   }
 
   ngOnInit(): void {
+  }
+
+  private forceDepartmentSelect(){
+    const departFC = this.projectForm.get("department");
+    const department = this.getDepartmentRequired();
+    if(department) {
+      departFC.setValue(department);
+      departFC.disable({ onlySelf: true });
+    }
+    else {
+      departFC.reset();
+    }
+  }
+
+  private getDepartmentRequired(): string {
+    const userLogged = this.authService.getUserData();
+    return userLogged.department == "GOVERNO" ? null : userLogged.department;
   }
 
   saveProject(){

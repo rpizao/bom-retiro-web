@@ -18,6 +18,7 @@ export interface Progress {
   state: string;
   percentual?: number;
   lock: boolean;
+  created: string;
   comments?: ProgressComment[];
 }
 

@@ -25,7 +25,7 @@
 
         <div class="form-check form-check-inline">
           <input class="form-check-input" type="radio" formControlName="priority" value="medium">
-          <label class="form-check-label" [ngClass]="{'required': check('priority') }">Média</label>
+          <label class="form-check-label" [ngClass]="{'required': check('priority') }">Normal</label>
         </div>
 
         <div class="form-check form-check-inline">
@@ -70,6 +70,7 @@
   </div>
 
   <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" routerLink="/projects">Cancelar</button>
     <button type="button" class="btn btn-primary" (click)="saveProject()">Confirma</button>
   </div>
 

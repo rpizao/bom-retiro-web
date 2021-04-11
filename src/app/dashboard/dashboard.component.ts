@@ -26,11 +26,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {}
 
-  goGraphics(indicator: Indicator){
-    if(indicator.configuration.dimension == "1d") this.router.navigate(['dashboard/graphics1d', indicator.code]);
-    else this.router.navigate(['dashboard/graphics2d', indicator.code]);
-  }
-
   getClassifierIcon(classifier: string): string {
     return DepartmentHelper.getClassifierIcon(classifier);
   }

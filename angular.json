@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-dashboard-starterkit": {
+    "sgm-project": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
-            "outputPath": "dist/angular-dashboard-starterkit",
+            "outputPath": "dist/sgm-project",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -125,24 +125,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-dashboard-starterkit:build"
+            "browserTarget": "sgm-project:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-dashboard-starterkit:build:production"
+              "browserTarget": "sgm-project:build:production"
             },
             "no-mocks": {
-              "browserTarget": "angular-dashboard-starterkit:build:no-mocks"
+              "browserTarget": "sgm-project:build:no-mocks"
             },
             "api": {
-              "browserTarget": "angular-dashboard-starterkit:build:api"
+              "browserTarget": "sgm-project:build:api"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-dashboard-starterkit:build"
+            "browserTarget": "sgm-project:build"
           }
         },
         "test": {
@@ -176,7 +176,7 @@
         }
       }
     },
-    "angular-dashboard-starterkit-e2e": {
+    "sgm-project-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -184,11 +184,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-dashboard-starterkit:serve"
+            "devServerTarget": "sgm-project:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-dashboard-starterkit:serve:production"
+              "devServerTarget": "sgm-project:serve:production"
             }
           }
         },
@@ -204,7 +204,7 @@
       }
     }
   },
-  "defaultProject": "angular-dashboard-starterkit",
+  "defaultProject": "sgm-project",
   "cli": {
     "analytics": false
   },

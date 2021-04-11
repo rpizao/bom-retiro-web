@@ -12,8 +12,7 @@ import { ProjectService } from 'src/services/project.service';
 import { AppComponent } from './app.component';
 import { routingModule } from './app.routing';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { Graphics1dComponent } from './dashboard/pages/graphics1d/graphics1d.component';
-import { Graphics2dComponent } from './dashboard/pages/graphics2d/graphics2d.component';
+import { GraphicsComponent } from './dashboard/pages/graphics/graphics.component';
 import { ItemsModule } from './items/items.module';
 import { ItemsService } from './items/_services/items.service';
 import { LoginComponent } from './login/login.component';
@@ -38,8 +37,7 @@ import { UiModule } from './_shared/ui/ui.module';
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    Graphics1dComponent,
-    Graphics2dComponent,
+    GraphicsComponent,
     LogoutComponent,
     ProjectComponent,
     DetailsProjectComponent,

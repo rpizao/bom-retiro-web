@@ -1,7 +1,7 @@
-<div class="container">
+<div class="row container">
   <span *ngIf="!indicators || indicators.length == 0">No momento, ainda não há indicadores disponíveis.</span>
 
-  <div class="card" *ngFor="let card of indicators">
+  <div class="card col-sm-3 col-xs-3" *ngFor="let card of indicators">
     <div class="card-body">
         <span class="header">[{{card.classifier}}]</span>
         <div class="card-title">
@@ -10,7 +10,7 @@
         <div class="description" innerHtml="{{card.description}}">
         </div>
         <div class="bottom">
-          <span class="clickable right" (click)="goGraphics(card)">ver gráfico >></span>
+          <span class="clickable right" [routerLink]="'/dashboard/graphics/' + card.code">ver gráfico >></span>
         </div>
     </div>
   </div>

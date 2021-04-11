@@ -51,7 +51,7 @@ div.input > .subtitle > i {
 }
 
 .selected {
-  border: 3px solid #e8e51e;
+  border: 3px solid #e8e51e !important;
 }
 
 ul {
@@ -100,7 +100,8 @@ a .subtitle {
 }
 
 .old {
-  background: gray;
+  background: rgb(150, 148, 148);
+  border: 1px solid gray;
 }
 
 .list-group {

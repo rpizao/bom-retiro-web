@@ -4,11 +4,11 @@ import { IndicatorService } from 'src/services/indicator.service';
 import { Indicator } from '../../models';
 
 @Component({
-  selector: 'app-graphics-2d',
-  templateUrl: './graphics2d.component.html',
-  styleUrls: ['./graphics2d.component.css']
+  selector: 'app-graphics',
+  templateUrl: './graphics.component.html',
+  styleUrls: ['./graphics.component.css']
 })
-export class Graphics2dComponent implements OnInit {
+export class GraphicsComponent implements OnInit {
 
   indicator: Indicator;
 
@@ -25,17 +25,13 @@ export class Graphics2dComponent implements OnInit {
   yAxisLabel: string;
 
   colorScheme = {
-    domain: ['#b8cee4', '#0a58ab']
+    domain: ['#085f08', '#13e413', '#2812d0', 'grey', 'red', 'gold', 'brown']
   };
 
   constructor(private healthService: IndicatorService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.healthService.getIndicador(this.activatedRoute.snapshot.params["code"], r => this.indicator = r);
-  }
-
-  goBack(){
-    this.router.navigate(["dashboard"]);
   }
 
 }
